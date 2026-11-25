@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color Tokens — Exact Stitch Design System */
+  --color-primary: #0F766E;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #E6F7F5;
+  --color-on-primary-container: #0B4F4A;
+  --color-mint-accent: #CCFBF1;
+  --color-on-mint-accent: #0F766E;
+  --color-secondary: #334E4C;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #EDF5F4;
+  --color-on-secondary-container: #1E3533;
+  --color-background: #FFFFFF;
+  --color-on-background: #0F172A;
+  --color-surface: #FFFFFF;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F8FBFA;
+  --color-surface-container: #F1F7F6;
+  --color-surface-container-high: #E6F0EE;
+  --color-on-surface: #0F172A;
+  --color-on-surface-variant: #475569;
+  --color-outline: #64748B;
+  --color-outline-variant: #CBD5E1;
+  --color-success: #15803D;
+  --color-on-success: #FFFFFF;
+  --color-success-container: #DCFCE7;
+  --color-on-success-container: #14532D;
+  --color-warning: #B45309;
+  --color-on-warning: #FFFFFF;
+  --color-warning-container: #FEF3C7;
+  --color-on-warning-container: #78350F;
+  --color-urgent: #C2410C;
+  --color-on-urgent: #FFFFFF;
+  --color-urgent-container: #FFEDD5;
+  --color-on-urgent-container: #7C2D12;
+  --color-emergency: #DC2626;
+  --color-on-emergency: #FFFFFF;
+  --color-emergency-container: #FEE2E2;
+  --color-on-emergency-container: #7F1D1D;
+  --color-error: #B91C1C;
+  --color-on-error: #FFFFFF;
+
+  /* Border Radius Tokens */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Typography Families */
+  --font-display: "Poppins", sans-serif;
+  --font-headline: "Poppins", sans-serif;
+  --font-title: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  /* Typography Scale */
+  --text-display-lg: 36px;
+  --text-display-lg--line-height: 44px;
+  --text-display-lg--letter-spacing: -0.5px;
+  --text-display-lg--font-weight: 700;
+
+  --text-display-lg-mobile: 28px;
+  --text-display-lg-mobile--line-height: 34px;
+  --text-display-lg-mobile--letter-spacing: -0.25px;
+  --text-display-lg-mobile--font-weight: 700;
+
+  --text-headline-lg: 24px;
+  --text-headline-lg--line-height: 32px;
+  --text-headline-lg--letter-spacing: -0.25px;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--letter-spacing: 0px;
+  --text-headline-md--font-weight: 600;
+
+  --text-title-md: 17px;
+  --text-title-md--line-height: 24px;
+  --text-title-md--letter-spacing: 0px;
+  --text-title-md--font-weight: 600;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--letter-spacing: 0px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 15px;
+  --text-body-md--line-height: 22px;
+  --text-body-md--letter-spacing: 0px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 18px;
+  --text-body-sm--letter-spacing: 0px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-lg: 15px;
+  --text-label-lg--line-height: 20px;
+  --text-label-lg--letter-spacing: 0px;
+  --text-label-lg--font-weight: 600;
+
+  --text-label-md: 13px;
+  --text-label-md--line-height: 18px;
+  --text-label-md--letter-spacing: 0px;
+  --text-label-md--font-weight: 600;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--letter-spacing: 0.25px;
+  --text-label-sm--font-weight: 500;
+
+  /* Transition Tokens */
+  --transition-duration-state-change: 150ms;
+  --transition-duration-surface-enter: 250ms;
+  --transition-duration-surface-exit: 150ms;
+  --ease-state-change: ease-out;
+  --ease-surface-enter: cubic-bezier(0.2, 0, 0, 1);
+  --ease-surface-exit: cubic-bezier(0.3, 0, 1, 1);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}

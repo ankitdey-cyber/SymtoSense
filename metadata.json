@@ -1,0 +1,6 @@
+{
+  "name": "SymptoSense",
+  "description": "Understand your symptoms and know when to see a doctor with local red-flag safety checks, structured symptom guidance, and multilingual support in English, Bengali, and Hindi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

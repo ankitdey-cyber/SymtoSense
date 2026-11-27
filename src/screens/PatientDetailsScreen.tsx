@@ -13,6 +13,7 @@ interface PatientDetailsScreenProps {
   onBack: () => void;
   onAnalyse: () => void;
   apiError: string | null;
+  apiErrorDetail?: string | null;
 }
 
 const SEX_OPTIONS: SexOption[] = ['female', 'male', 'other'];
@@ -26,6 +27,7 @@ export function PatientDetailsScreen({
   onBack,
   onAnalyse,
   apiError,
+  apiErrorDetail,
 }: PatientDetailsScreenProps) {
   const t = TRANSLATIONS[language];
   const [consentError, setConsentError] = useState(false);
@@ -339,13 +341,23 @@ export function PatientDetailsScreen({
         {apiError && (
           <div
             role="alert"
-            className="rounded-lg bg-emergency-container border border-error/25 p-4 text-on-emergency-container flex flex-col gap-1.5"
+            className="rounded-lg bg-emergency-container border border-error/25 p-4 text-on-emergency-container flex flex-col gap-2"
           >
             <div className="flex items-center gap-2 font-label text-label-lg">
               <AlertTriangle className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>{t.errorTitle}</span>
             </div>
             <p className="font-body text-body-sm text-pretty">{apiError}</p>
+            {apiErrorDetail && (
+              <details className="mt-1 rounded-md bg-surface/70 border border-error/20 p-2.5 text-xs">
+                <summary className="cursor-pointer font-label text-label-sm select-none">
+                  Scan Diagnostics (Upstream Error Detail)
+                </summary>
+                <pre className="mt-2 whitespace-pre-wrap break-words font-mono text-[11px] leading-relaxed text-on-surface-variant">
+                  {apiErrorDetail}
+                </pre>
+              </details>
+            )}
           </div>
         )}
 

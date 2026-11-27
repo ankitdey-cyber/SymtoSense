@@ -3,11 +3,13 @@ import { AnalysisResultSchema } from './schema';
 
 export class AnalysisApiError extends Error {
   status?: number;
+  detail?: string;
 
-  constructor(message: string, status?: number) {
+  constructor(message: string, status?: number, detail?: string) {
     super(message);
     this.name = 'AnalysisApiError';
     this.status = status;
+    this.detail = detail;
   }
 }
 
@@ -27,7 +29,11 @@ async function requestAnalysisOnce(payload: AnalyzeRequestPayload): Promise<unkn
       data && typeof data === 'object' && 'error' in data && typeof data.error === 'string'
         ? data.error
         : 'Unable to analyse symptoms right now. Please try again shortly.';
-    throw new AnalysisApiError(serverMessage, response.status);
+    const serverDetail =
+      data && typeof data === 'object' && 'detail' in data && typeof data.detail === 'string'
+        ? data.detail
+        : undefined;
+    throw new AnalysisApiError(serverMessage, response.status, serverDetail);
   }
 
   return data;
@@ -55,8 +61,8 @@ export async function analyzeSymptoms(
       );
     } catch (error) {
       lastError = error;
-      // Do not retry client errors or key/quota configuration issues
-      if (error instanceof AnalysisApiError && error.status && error.status >= 400 && error.status < 500) {
+      // Do not retry structured server errors (server already handles model retries & fallback)
+      if (error instanceof AnalysisApiError && error.status && error.status !== 502) {
         throw error;
       }
     }

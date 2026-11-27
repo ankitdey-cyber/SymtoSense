@@ -9,7 +9,7 @@ import type {
 } from './types';
 import { checkRedFlags } from './safety/redFlags';
 import { applySafetyFilter } from './safety/filter';
-import { analyzeSymptoms } from './ai/client';
+import { AnalysisApiError, analyzeSymptoms } from './ai/client';
 import {
   clearAllHistoryData,
   getHistoryOptIn,
@@ -61,6 +61,7 @@ export default function App() {
 
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [apiErrorDetail, setApiErrorDetail] = useState<string | null>(null);
 
   const [currentResult, setCurrentResult] = useState<FilteredAnalysisResult | null>(null);
   const [currentTimestamp, setCurrentTimestamp] = useState<string | undefined>(undefined);
@@ -90,16 +91,19 @@ export default function App() {
     setCurrentTimestamp(undefined);
     setCurrentResultId(null);
     setApiError(null);
+    setApiErrorDetail(null);
     setScreen('symptom-input');
   };
 
   const handleNavigate = (target: ScreenId) => {
     setApiError(null);
+    setApiErrorDetail(null);
     setScreen(target);
   };
 
   const handleAnalyse = async () => {
     setApiError(null);
+    setApiErrorDetail(null);
 
     // Step 3: BEFORE calling Gemini, run local rule-based red-flag check.
     // If any red flag matches, go straight to Emergency screen and do NOT call AI for medicines.
@@ -168,7 +172,9 @@ export default function App() {
         err instanceof Error
           ? err.message
           : 'Unable to analyse your symptoms right now. Please try again.';
+      const detail = err instanceof AnalysisApiError && err.detail ? err.detail : null;
       setApiError(message);
+      setApiErrorDetail(detail);
     } finally {
       setIsAnalysing(false);
     }
@@ -254,6 +260,7 @@ export default function App() {
           onBack={() => handleNavigate('symptom-input')}
           onAnalyse={handleAnalyse}
           apiError={apiError}
+          apiErrorDetail={apiErrorDetail}
         />
       ) : screen === 'results' && currentResult ? (
         <ResultsScreen
